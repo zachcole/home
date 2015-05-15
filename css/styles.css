@@ -14,10 +14,18 @@
 	color: white;
 }
 
-#fractaltext{
+#fractaltxt{
 	padding-left: 20%;
 	padding-top: 5%;
 	padding-bottom: 5%;
+	width: 65%;
+	height: auto;
+}
+
+#resumetxt{
+	padding-left: 20%;
+	padding-top: 7.5%;
+	padding-bottom: 7.5%;
 	width: 65%;
 	height: auto;
 }
