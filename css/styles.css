@@ -3,9 +3,9 @@
 	background-color: black;
 	background-image: url("../images/fractal-wallpapers.jpg");
 	background-repeat: no-repeat;
-	background-size: auto 500px;
+	background-size: auto 100%;
 	background-position: right;
-	height: 500px;
+	height: 40%;
 	width: 100%;
 }
 
@@ -16,7 +16,10 @@
 
 #fractaltext{
 	padding-left: 20%;
-	padding-top: 100px;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	width: 65%;
+	height: auto;
 }
 
 #stintro, #ptintro{
@@ -26,6 +29,10 @@
 
 .titleandbody{
 	text-align: center;
+}
+
+@media screen and (max-width:959px){
+	
 }
 
 
