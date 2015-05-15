@@ -1,0 +1,31 @@
+#title{
+	margin-top: -20px;
+	background-color: black;
+	background-image: url("../images/fractal-wallpapers.jpg");
+	background-repeat: no-repeat;
+	background-size: auto 500px;
+	background-position: right;
+	height: 500px;
+	width: 100%;
+}
+
+#title-txt{
+	text-align: center;
+	color: white;
+}
+
+#fractaltext{
+	padding-left: 20%;
+	padding-top: 100px;
+}
+
+#stintro, #ptintro{
+	font-size: 18px;
+	padding-top: 10%
+}
+
+.titleandbody{
+	text-align: center;
+}
+
+

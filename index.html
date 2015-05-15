@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Fractals - Zach Cole</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/styles.css" rel="stylesheet">
+	</head>
+	<body>
+		
+		<div class="navbar navbar-inverse navbar-static-top">
+		
+			<div class="container">
+				
+				<a href="#" class="navbar-brand">Zach Cole</a>
+				
+				<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+					
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					
+				</button>
+				
+				<div class="collapse navbar-collapse navHeaderCollapse">
+					
+					<ul class="nav navbar-nav navbar-right">
+						
+						<li><a href="#">Home</a></li>
+						<li class="active"><a href="#">Fractals</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Social Media <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="https://twitter.com/zco1e">Twitter</a></li>
+								<li><a href="https://www.facebook.com/zach.cole.3367">Facebook</a></li>
+								<li><a href="https://plus.google.com/108789533335685439020/posts/p/pub">Google+</a></li>
+							</ul>
+						</li>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Contact</a></li>
+						
+					</ul>
+					
+				</div>
+				
+			</div>
+		
+		</div>
+		
+		
+		<div id="title">
+				<img id="fractaltext" src="images/FractalText.png">
+		</div>
+		
+		<div class="container">
+		
+			<div class="jumbotron text-center">
+			
+				<h1>Sierpinski Triangle</h1>
+			
+			</div>
+			
+		</div>
+		
+		
+		<div class="container">
+		
+			<div class="row">
+			
+				<div class="col-md-6">
+					
+					<div id="st-container">
+						<canvas id="sierpinski_canvas" width="400px" height="400px" style="padding-left: 10%"></canvas>
+					</div>
+
+					<button id="btn0" class="btn btn-primary" onClick="BaseTriangle(sctx);">0</button>
+					<button id="btn1" class="btn btn-primary" onclick="BaseTriangle(sctx); Sierpinski(1);">1</button>
+					<button id="btn2" class="btn btn-primary" onclick="BaseTriangle(sctx); Sierpinski(2);">2</button>
+					<button id="btn3" class="btn btn-primary" onclick="BaseTriangle(sctx); Sierpinski(3);">3</button>
+					<button id="btn4" class="btn btn-primary" onclick="BaseTriangle(sctx); Sierpinski(4);">4</button>
+					<button id="btn5" class="btn btn-primary" onclick="BaseTriangle(sctx); Sierpinski(5);">5</button>
+					<button id="btn6" class="btn btn-primary" onclick="BaseTriangle(sctx); Sierpinski(6);">6</button>
+					<button id="btn7" class="btn btn-primary" onclick="BaseTriangle(sctx); Sierpinski(7);">7</button>
+					<button id="btn8" class="btn btn-primary" onclick="BaseTriangle(sctx); Sierpinski(8);">8</button>
+					<button id="btn9" class="btn btn-primary" onclick="BaseTriangle(sctx); Sierpinski(9);">9</button>
+					<button id="btn10" class="btn btn-primary" onclick="BaseTriangle(sctx); Sierpinski(10);">10</button>
+					<button id="btnanimate" class="btn btn-primary" onclick="Animate(sctx);">Animate</button>
+					
+					<script>
+					var scan = document.getElementById("sierpinski_canvas");
+					var sctx = scan.getContext("2d");
+					
+					BaseTriangle(sctx);
+					SArea(0);
+					
+					function BaseTriangle(sctx){
+						sctx.fillStyle="#000000";
+						drawTriangle(0,200*Math.sqrt(3),400,200*Math.sqrt(3),200,0,sctx);
+					}
+					
+					function Sierpinski(depth){
+						sctx.fillStyle="#ffffff";
+						removeCenter(0,200*Math.sqrt(3),400,200*Math.sqrt(3),200,0,depth,sctx);
+					}
+					
+					function drawTriangle(x0, y0, x1, y1, x2, y2, sctx){
+						sctx.beginPath();
+						sctx.moveTo(x0, y0);
+						sctx.lineTo(x1, y1);
+						sctx.lineTo(x2, y2);
+						sctx.lineTo(x0, y0);
+						sctx.fill();
+					}
+					
+					function removeCenter(x0, y0, x1, y1, x2, y2, depth, sctx){
+						if (depth > 0){
+							//variables that hold the midpoint coordinates for each side of the triangle.
+							var x01 = (x0 + x1)/2, y01 = (y0 + y1)/2;
+							var x02 = (x0 + x2)/2, y02 = (y0 + y2)/2;
+							var x12 = (x1 + x2)/2, y12 = (y1 + y2)/2;
+							drawTriangle(x01, y01, x02, y02, x12, y12, sctx);
+							
+							//recursively remove center triangles.
+							if(depth > 1){
+								removeCenter(x0, y0, x01, y01, x02, y02, depth-1, sctx);
+								removeCenter(x01, y01, x1, y1, x12, y12, depth-1, sctx);
+								removeCenter(x02, y02, x12, y12, x2, y2, depth-1, sctx);
+							}
+						}
+						
+					}
+					
+					function Animate(sctx){
+						BaseTriangle(sctx);
+						
+						(function theLoop (i) {
+							setTimeout(function () {
+								Sierpinski(i);
+								i++;
+								if (i < 10) {          // If i < 10, keep going
+									theLoop(i);       // Call the loop again, and pass it the current value of i
+								}
+							}, 1000);
+						})(1);
+						
+					}
+					
+				</script>
+					
+				</div>
+				<div id="stintro" class="col-md-6" style="padding-top: 10%">
+					<p>The Sierpinski Triangle fractal is constructed in the following manner:
+						<ol>
+							<li>Begin with an equilateral triangle.</li>
+							<li>Divide this triangle into four congruent equilateral triangles.</li>
+							<li>Remove the central triangle.</li>
+							<li>Repeat steps 2 & 3 recursively for each equilateral triangle formed.</li>
+						</ol>
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				
+				<div class="col-md-6">
+					
+					<h2 class="titleandbody">Perimeter</h2>
+					<p class="titleandbody">Let's assume that the side lengths of a given equilateral triangle are 1 unit.<br>
+						   Then \[ P_0 = 1 + 1 + 1 = 3 \]  <br>
+						   Now consider the first iteration.  We now have 3 triangles with side length 1/2.<br>
+						   \[ P_1 = 3(triangles) \cdot 3(sides) \cdot \frac{1}{2}(side length) = \frac{9}{2} \]<br>
+						   The second iteration...<br>
+						   \[ P_2 = 9(triangles) \cdot 3(sides) \cdot \frac{1}{4}(side length) = \frac{27}{4} \]<br>
+						   and so on...<br>
+						   \[ P_3 = 27(triangles) \cdot 3(sides) \cdot \frac{1}{8}(side length) = \frac{81}{8} \\
+							   P_4 = 81(triangles) \cdot 3(sides) \cdot \frac{1}{16}(side length) = \frac{243}{16}\\
+							   P_5 = 243(triangles) \cdot 3(sides) \cdot \frac{1}{32}(side length) = \frac{729}{32}\]
+					</p>
+					<p class="titleandbody">
+						Now let's consider the sequence of perimeters through the first five iterations.<br>
+						\[ \left \{3, \frac{9}{2}, \frac{27}{4}, \frac{81}{8}, \frac{243}{16}, \frac{729}{32} \right \} \\
+							= \left \{\frac{3}{1}, \frac{9}{2}, \frac{27}{4}, \frac{81}{8}, \frac{243}{16}, \frac{729}{32} \right \} \\
+							= \left \{\frac{3^{1}}{2^{0}}, \frac{3^{2}}{2^{1}}, \frac{3^{3}}{2^{2}}, \frac{3^{4}}{2^{3}}, \frac{3^{5}}{2^{4}}, \frac{3^{6}}{2^{5}} \right \}\] <br>
+						Notice that the sequence is geometric with the following common ratio:
+						\[ \frac{3^{n+1}}{2^{n}} \]
+					</p>
+					<p class="titleandbody">
+						Since fractals are infinite, we can find the true perimeter of the Sierpinski triangle by finding the limit as it approaches infinity.
+						
+						\[ \lim_{n \to \infty} \frac{3^{n+1}}{2^{n}} = \frac{3^{\infty+1}}{2^{\infty}} = \frac{3^{\infty}}{2^{\infty}} = \frac{\infty}{\infty} = \infty\] 
+					</p>
+					
+					
+					
+				</div>
+				
+				<div class="col-md-6">
+					<h2 class="titleandbody">Area</h2>
+					<p class="titleandbody">
+						For sake of simplicity, let's assume we have an equilateral triangle whose area is 1 unit. <br>
+						Then \[ A_0 = 1 \] <br>
+						If we perform the first iteration, we are constructing four <b>EQUIVALENT</b> triangles and removing the central one.<br>
+						Thus \[ A_1 = 1 - \frac{1}{4} = \frac{3}{4} \]<br>
+						If we continue this trend, we are taking three fourths of the area of each triangle of each iteration.  Therefore, we are left with the following  areas:<br>
+						\[ A_2 = \frac{3}{4}(current\,area) \cdot \frac{3}{4}(how\,much\,of\,the\,area\,we\,want) = \frac{9}{16} \\
+							A_3 = \frac{9}{16}(current\,area) \cdot \frac{3}{4}(how\,much\,of\,the\,area\,we\,want) = \frac{27}{64} \\
+							A_4 = \frac{27}{64}(current\,area) \cdot \frac{3}{4}(how\,much\,of\,the\,area\,we\,want) = \frac{81}{256} \\ 
+							A_5 = \frac{81}{256}(current\,area) \cdot \frac{3}{4}(how\,much\,of\,the\,area\,we\,want) = \frac{243}{1024}\]<br>
+							
+						As we did with the perimeter, lets take a look at the sequence of areas from the first five iterations.
+						\[ \left \{1, \frac{3}{4}, \frac{9}{16}, \frac{27}{64}, \frac{81}{256}, \frac{243}{1024} \right \} \\
+							= \left \{\frac{1}{1}, \frac{3}{4}, \frac{9}{16}, \frac{27}{64}, \frac{81}{256}, \frac{243}{1024} \right \} \\
+							= \left \{\frac{3^{0}}{4^{0}}, \frac{3^{1}}{4^{1}}, \frac{3^{2}}{4^{2}}, \frac{3^{3}}{4^{3}}, \frac{3^{4}}{4^{4}}, \frac{3^{5}}{4^{5}} \right \}	\]<br>
+							
+						Which we can see gives us a geometric series with the following common ratio:
+						\[ \frac{3^{n}}{4^{n}} \]<br>
+						As with the perimeter, in order to find the true area of a fractal, we must find the limit of the ratio as it approaches inifity.<br>
+						\[ \lim_{n \to \infty} \frac{3^{n}}{4^{n}} =  \frac{3^{\infty}}{4^{\infty}} = \left(\frac{3}{4}\right)^{\infty} = 0\]
+					</p>
+				</div>
+			
+			</div>
+		
+		</div>
+		
+		<div class="container">
+		
+			<div class="jumbotron text-center">
+			
+				<h1>Pythagorean Tree</h1>
+			
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					<div id="pt-container">
+						<canvas width="500px" height="500px" id="pytree_canvas"></canvas>
+					</div>
+						
+					<div style="padding-left: 15%;">
+						<button class="btn btn-success" onclick="PyTree(0);">0</button>
+						<button class="btn btn-success" onclick="PyTree(1);">1</button>
+						<button class="btn btn-success" onclick="PyTree(2);">2</button>
+						<button class="btn btn-success" onclick="PyTree(3);">3</button>
+						<button class="btn btn-success" onclick="PyTree(4);">4</button>
+						<button class="btn btn-success" onclick="PyTree(5);">5</button>
+						<button class="btn btn-success" onclick="AnimatePyTree(pctx);">Animate</button>
+					</div>
+					
+					<script>
+				
+						var pcan = document.getElementById("pytree_canvas");
+						var pctx = pcan.getContext("2d");
+						
+						baseSquare();
+						
+						
+						function baseSquare(){
+							pctx.fillStyle="#291400";
+							drawSquare(200,400,200,300,300,300,300,400, pctx);
+						}
+						
+						function itOne(){
+							pctx.fillStyle="#3D1F00";
+							drawSquare(200,300,150,250,200,200,250,250, pctx);
+							drawSquare(250,250,300,200,350,250,300,300, pctx);
+						}
+						
+						function itTwo(){
+							pctx.fillStyle="#663300";
+							drawSquare(150,250,100,250,100,200,150,200, pctx);
+							drawSquare(150,200,150,150,200,150,200,200, pctx);
+							drawSquare(300,200,300,150,350,150,350,200, pctx);
+							drawSquare(350,200,400,200,400,250,350,250, pctx);
+						}
+						
+						function itThree(){
+							pctx.fillStyle="#754719";
+							drawSquare(100,250,75,275,50,250,75,225, pctx);
+							drawSquare(75,225,50,200,75,175,100,200, pctx);
+							drawSquare(150,150,125,125,150,100,175,125, pctx);
+							drawSquare(175,125,200,100,225,125,200,150, pctx);
+							drawSquare(300,150,275,125,300,100,325,125, pctx);
+							drawSquare(325,125,350,100,375,125,350,150, pctx);
+							drawSquare(400,200,425,175,450,200,425,225, pctx);
+							drawSquare(425,225,450,250,425,275,400,250, pctx);
+						}
+						
+						function itFour(){
+							pctx.fillStyle="#006B00";
+							drawSquare(75,275,75,300,50,300,50,275, pctx);
+							drawSquare(50,275,25,275,25,250,50,250, pctx);
+							drawSquare(50,200,25,200,25,175,50,175, pctx);
+							drawSquare(50,175,50,150,75,150,75,175, pctx);
+							drawSquare(125,125,100,125,100,100,125,100, pctx);
+							drawSquare(125,100,125,75,150,75,150,100, pctx);
+							drawSquare(200,100,200,75,225,75,225,100, pctx);
+							drawSquare(225,100,250,100,250,125,225,125, pctx);
+							drawSquare(275,125,250,125,250,100,275,100, pctx);
+							drawSquare(275,100,275,75,300,75,300,100, pctx);
+							drawSquare(350,100,350,75,375,75,375,100, pctx);
+							drawSquare(375,100,400,100,400,125,375,125, pctx);
+							drawSquare(425,175,425,150,450,150,450,175, pctx);
+							drawSquare(450,175,475,175,475,200,450,200, pctx);
+							drawSquare(450,250,475,250,475,275,450,275, pctx);
+							drawSquare(450,275,450,300,425,300,425,275, pctx);
+						}
+						
+						function itFive(){
+							pctx.fillStyle="#008A00";
+							drawSquare(75,300,87.5,312.5,75,325,62.5,312.5, pctx);
+							drawSquare(62.5,312.5,50,325,37.5,312.5,50,300, pctx);
+							drawSquare(25,275,12.5,287.5,0,275,12.5,262.5, pctx);
+							drawSquare(12.5,262.5,0,250,12.5,237.5,25,250, pctx);
+							drawSquare(25,200,12.5,212.5,0,200,12.5,187.5, pctx);
+							drawSquare(12.5,187.5,0,175,12.5,162.5,25,175, pctx);
+							drawSquare(50,150,37.5,137.5,50,125,62.5,137.5, pctx);
+							drawSquare(62.5,137.5,75,125,87.5,137.5,75,150, pctx);
+							drawSquare(100,125,87.5,137.5,75,125,87.5,112.5, pctx);
+							drawSquare(87.5,112.5,75,100,87.5,87.5,100,100, pctx);
+							drawSquare(125,75,112.5,62.5,125,50,137.5,62.5, pctx);
+							drawSquare(137.5,62.5,150,50,162.5,62.5,150,75, pctx);
+							drawSquare(200,75,187.5,62.5,200,50,212.5,62.5, pctx);
+							drawSquare(212.5,62.5,225,50,237.5,62.5,225,75, pctx);
+							drawSquare(250,100,262.5,87.5,275,100,262.5,112.5, pctx);
+							drawSquare(262.5,112.5,275,125,262.5,137.5,250,125, pctx);
+							drawSquare(250,125,237.5,137.5,225,125,237.5,112.5, pctx);
+							drawSquare(237.5,112.5,225,100,237.5,87.5,250,100, pctx);
+							drawSquare(275,75,262.5,62.5,275,50,287.5,62.5, pctx);
+							drawSquare(287.5,62.5,300,50,312.5,62.5,300,75, pctx);
+							drawSquare(350,75,337.5,62.5,350,50,362.5,62.5, pctx);
+							drawSquare(362.5,62.5,375,50,387.5,62.5,375,75, pctx);
+							drawSquare(400,100,412.5,87.5,425,100,412.5,112.5, pctx);
+							drawSquare(412.5,112.5,425,125,412.5,137.5,400,125, pctx);
+							drawSquare(425,150,412.5,137.5,425,125,437.5,137.5, pctx);
+							drawSquare(437.5,137.5,450,125,462.5,137.5,450,150, pctx);
+							drawSquare(475,175,487.5,162.5,500,175,487.5,187.5, pctx);
+							drawSquare(487.5,187.5,500,200,487.5,212.5,475,200, pctx);
+							drawSquare(475,250,487.5,237.5,500,250,487.5,262.5, pctx);
+							drawSquare(487.5,262.5,500,275,487.5,287.5,475,275, pctx);
+							drawSquare(450,300,462.5,312.5,450,325,437.5,312.5, pctx);
+							drawSquare(437.5,312.5,425,325,412.5,312.5,425,300, pctx);
+						}
+						
+						function drawSquare(x1, y1, x2, y2, x3, y3, x4, y4, pctx){
+							pctx.beginPath();
+							pctx.moveTo(x1, y1);
+							pctx.lineTo(x2, y2);
+							pctx.lineTo(x3, y3);
+							pctx.lineTo(x4, y4);
+							pctx.lineTo(x1, y1);
+							pctx.fill();
+						}	
+							
+						function PyTree(pdepth){
+							if(pdepth === 5){
+								pctx.clearRect(0,0,500,500);
+								baseSquare();
+								itOne();
+								itTwo();
+								itThree();
+								itFour();
+								itFive();
+							}else if(pdepth === 4){
+								pctx.clearRect(0,0,500,500);
+								baseSquare();
+								itOne();
+								itTwo();
+								itThree();
+								itFour();
+							}else if(pdepth === 3){
+								pctx.clearRect(0,0,500,500);
+								baseSquare();
+								itOne();
+								itTwo();
+								itThree();
+							}else if(pdepth === 2){
+								pctx.clearRect(0,0,500,500);
+								baseSquare();
+								itOne();
+								itTwo();
+							} else if(pdepth === 1){
+								pctx.clearRect(0,0,500,500);
+								baseSquare();
+								itOne();
+							}else{
+								pctx.clearRect(0,0,500,500);
+								baseSquare();
+							}
+						}
+						
+						function AnimatePyTree(pctx){
+							pctx.clearRect(0,0,500,500);
+							baseSquare();
+							setTimeout(function(){itOne();}, 1000);
+							setTimeout(function(){itTwo();}, 2000);
+							setTimeout(function(){itThree();}, 3000);
+							setTimeout(function(){itFour();}, 4000);
+							setTimeout(function(){itFive();}, 5000);
+						}		
+					
+					</script>
+					
+				</div>
+				<div id="ptintro" class="col-md-6">
+					<p>
+						The Pythagoras Tree fractal is constructed in the following manner:
+						<ol>
+							<li>Begin with a square.</li>
+							<li>Construct two squares on top of the original square such that, when the edges of all three squares meet, a 45-45-90 triangle is formed.</li>
+							<li>Repeat Step 2 recursively for each square formed.</li>
+						</ol>
+					</p>
+				</div>
+			</div>
+			
+			<div class="row">
+				<h2 class="titleandbody">Area</h2>
+				<p class="titleandbody">
+					Let's assume we have a square with side lengths of &radic;2 units.<br>
+					So \[ A_0 = \sqrt{2} \cdot \sqrt{2} = \sqrt{2}^{2} = 2 \]
+					In order for one side to be the hypotenuse of a 45-45-90 triangle, we know the legs must be of length 1.<br>
+					Thus, the first iteration of the Pythagoras Tree gives us two squares with side length of 1.<br>
+					Notice that \[ A_1 = A_0 + (2 \cdot 1^{2}) = 2 + 2 = 4 \]<br>
+					If we follow the same steps in the second iteration, for the hypotenuse to be 1 unit, the legs must be of length &radic;1/2.
+					\[ A_2 = A_0 + A_1 + (4 \cdot \left(\sqrt{\frac{1}{2}}\right)^{2}) \\= 2 + 2 + (4 \cdot \frac{1}{2}) \\= 2 + 2 + 2 \\= 6\]<br>
+					We can see that the sum of the areas of the same sized squares are equal to the original square's area.<br>
+					Thus, a generalized formula: \[ A_n = 2(n+1) \]<br>
+					Even more general for side length s: \[ A_n = s^{2}(n+1) \]<br>
+					In order to find the true area of the fractal in our example, we need to find the limit of this formula as it approaches infinity.<br>
+					\[ \lim_{n \to \infty} 2(n+1) = 2(\infty+1)\\= 2(\infty)\\= \infty \]<br>
+					<b>HOWEVER</b>, we have not shown that the area of the fractal diverges.  We have shown that the <b>sum of the areas of each square diverges.</b>  What we have failed to consider is the overlap that occurs beginning in the fifth iteration.
+				</p>
+				
+			</div>
+		</div>
+		
+		
+		<div class="navbar navbar-default navbar-fixed-bottom">
+		
+			<div class="container">
+				
+				<p class="navbar-text" pull-left>Site Built by Zach Cole</p>
+				<a href="#" class="navbar-btn btn-success btn pull-right">Subscribe for Updates</a>
+				
+			</div>
+		
+		</div>
+		
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+	</body>
+</html>
