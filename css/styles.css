@@ -30,9 +30,39 @@
 	height: auto;
 }
 
+#hometxt{
+	padding-left: 10%;
+	padding-top: 6.3%;
+	padding-bottom: 6.5%;
+	width: 70%;
+	height: auto;
+}
+
 #stintro, #ptintro{
 	font-size: 18px;
 	padding-top: 10%
+}
+
+#mcpu{
+	padding-left: 25%;
+	padding-top:0%;
+	padding-bottom: 5%;
+
+}
+
+#sologo{
+	width: 100%;
+	height: auto;
+}
+
+#ghlogo{
+	width: 100%;
+	height: auto;
+}
+
+#selogo{
+	width: 100%;
+	height: auto;
 }
 
 .titleandbody{
