@@ -51,7 +51,22 @@
 				<img id="fractaltxt" src="images/FractalText.png">
 		</div>
 		
-		<div class="container">
+		<div class="container" style="padding-top: 50px">
+		
+			<div class="jumbotron text-center">
+			
+				<h1>Introduction</h1>
+			
+			</div>
+			
+			<h1 class="titleandbody">What are fractals?</h1>
+			<p class="titleandbody">A fractal is never-ending pattern that displays at every scale.</p>
+			<h1 class="titleandbody">Why do we study fractals?</h1>
+			<p class="titleandbody">We are interested in studying properties of fractals, such as perimeter and area.</p>
+			
+		</div>
+		
+		<div class="container" style="padding-top: 50px">
 		
 			<div class="jumbotron text-center">
 			
@@ -90,7 +105,6 @@
 					var sctx = scan.getContext("2d");
 					
 					BaseTriangle(sctx);
-					SArea(0);
 					
 					function BaseTriangle(sctx){
 						sctx.fillStyle="#000000";
@@ -216,6 +230,9 @@
 						\[ \lim_{n \to \infty} \frac{3^{n}}{4^{n}} =  \frac{3^{\infty}}{4^{\infty}} = \left(\frac{3}{4}\right)^{\infty} = 0\]
 					</p>
 				</div>
+				
+			<h1 class="titleandbody">Infinite Zoom</h1>
+			<img style="padding-bottom: 75px;" src="images/dreiecka.gif" class="center-block">
 			
 			</div>
 		
@@ -427,11 +444,148 @@
 					Even more general for side length s: \[ A_n = s^{2}(n+1) \]<br>
 					In order to find the true area of the fractal in our example, we need to find the limit of this formula as it approaches infinity.<br>
 					\[ \lim_{n \to \infty} 2(n+1) = 2(\infty+1)\\= 2(\infty)\\= \infty \]<br>
-					<b>HOWEVER</b>, we have not shown that the area of the fractal diverges.  We have shown that the <b>sum of the areas of each square diverges.</b>  What we have failed to consider is the overlap that occurs beginning in the fifth iteration.
+					<b>HOWEVER</b>, we have not shown that the area of the fractal diverges.  We have shown that the <b>sum of the areas of each square diverges.</b>  What we have failed to consider is the overlap that occurs beginning in the fifth iteration.  Consider the eleventh iteration shown below.
+				</p>
+				
+				<img src="images/iteration11.gif" class="center-block">
+				<p class="titleandbody" style="font-size: 10px">(Lawrence H. Riddle)</p>
+				
+				<p class="titleandbody">
+					Notice the overlap in the tree. Also notice a more defined tree shape is being formed.  While the exact area of this fractal is unkown, we can see that it does in fact <b>converge</b> to some finite value.
 				</p>
 				
 			</div>
 		</div>
+		
+		
+		
+		<div class="container" style="padding-top: 50px">
+		
+			<div class="jumbotron text-center">
+			
+				<h1>Koch Snowflake</h1>
+			
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					<div id="pt-container">
+						<img src="images/Von_koch_curve.gif" class="center-block" width="400" height="400">
+					</div>		
+						
+					<div class="center-block" >
+						<p class="titleandbody" style="font-size: 10px">(Wikipedia)</p>
+					</div>
+					
+					<script>
+				
+						var kochcan = document.getElementById("koch_canvas");
+						var kochctx = kochcan.getContext("2d");
+						
+						DrawFractal([50,400],[450,400], 1);
+						
+						function KochDrawLine(a, b){
+							kochctx.beginPath();
+							kochctx.moveTo(a[0], a[1]);
+							kochctx.lineTo(b[0], b[1]);
+							kochctx.stroke();
+						}	
+						
+						function Add(a, b){
+							return [a[0]+b[0], a[1]+b[1]];
+						}
+						
+						function Subtract(a, b){
+							return [a[0]-b[0], a[1]-b[1]];
+						}
+						
+						function Multiply(x, num){
+							return [x[0] * num, x[1] * num];
+						}
+						
+						function Divide(x, num){
+							return [x[0] / num, x[1] / num];
+						}
+						
+						function Length(a, b){
+							return Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2));
+						}
+						
+						function DrawFractal(a, b, depth){
+							var c = Divide(Add(Multiply(a, 2), b), 3);
+							var d = Divide(Add(Multiply(b, 2), a), 3);
+							var f = Divide(Add(a, b), 2);
+							
+							var v1 = Divide(Subtract(f, a), Length(f, a));
+							var v2 = [v1[1], -v1[0]];
+							
+							var e = Add(Multiply(v2, Math.sqrt(3)/6 * Length(b, a)), f);
+							
+							KochDrawLine(a, b);
+							
+							if(depth != 0){
+								for( var i = 0; i < depth; i++){
+									KochDrawLine(c, d);
+								}
+							};
+							
+							DrawFractal(a, c, depth-1);
+							DrawFractal(c, e, depth-1);
+							DrawFractal(e, d, depth-1);
+							DrawFractal(d, b, depth-1);
+							
+						}
+					
+					</script>
+					
+				</div>
+				<div id="ptintro" class="col-md-6">
+					<p>
+						The Koch Snowflake fractal is constructed in the following manner:
+						<ol>
+							<li>Begin with an equilateral triangle. Consider each side as a line segment.</li>
+							<li>Divide each segment into three equal segments.</li>
+							<li>Draw an equilateral triangle outward with the middle segment from Step 2 as its base.  Afterwards, remove the base. </li>
+							<li>Repeat Step 2 and Step 3 recursively for each segment formed.</li>
+						</ol>
+					</p>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					<h2 class="titleandbody">Perimeter</h2>
+					<p class="titleandbody">
+						Let's assume the side length of an equilateral triangle is one unit.<br>
+						Then the side length \[S_{0} = 1\] and number of sides \[N_{0} = 3\] give us perimeter \[ P_{0} = N_{0} \cdot S_{0} = 3(sides) \cdot 1(sidelength) = 3 \] <br>
+						Notice that after each iteration, the side length becomes a third of the value as the previous iteration.  Consider the side length after each iteration is as follows when s is the side length of the original equilateral triangle. \[S_{n} = \frac{S_{n-1}}{3} = \frac{s}{3^{n}} \]<br>
+						We can also see a pattern for calculating the number of sides in each iteration.  Each original side increases by a factor of four after each iteration.
+						\[N_{n} = 3 \cdot 4^{n} \] <br>
+						Hence we can generalize the perimeter for any iteration by the following.
+						\[P_{n} = N_{n} \cdot S_{n} = 3 \cdot 4^{n} \cdot \frac{s}{3^{n}} = 3 \cdot s \cdot \left( \frac{4}{3}\right) ^{n}\] <br>
+						Of course, to truly find the perimeter of the Koch snowflake we must take its limit as it approaches inifity.
+						\[ \lim_{n \to \infty} 3 \cdot s \cdot \left( \frac{4}{3}\right) ^{n} = 3 \cdot s \cdot \left( \frac{4}{3}\right) ^{\infty} = \infty \]
+					</p>
+				</div>
+				
+				<div class="col-md-6">
+					
+					<h2 class="titleandbody">Area</h2>
+					<p class="titleandbody">
+						When calculating the area of the Koch snowflake, consider an equilateral triangle is added to <b>each</b> side of the iteration.
+					</p>
+					
+					
+					
+				</div>
+				
+			</div>
+			
+			<h1 class="titleandbody">Infinite Zoom</h1>
+			<img src="images/koch_zoom.gif" class="center-block">
+			
+		</div>
+		
 		
 		
 		<div class="navbar navbar-default navbar-fixed-bottom">
