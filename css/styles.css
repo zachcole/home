@@ -69,6 +69,15 @@
 	text-align: center;
 }
 
+p.titleandbody{
+	font-size: 20px;
+}
+
+h2.titleandbody{
+	font-size: 45px;
+	padding-bottom: 10px;
+}
+
 @media screen and (max-width:959px){
 	
 }
