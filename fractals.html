@@ -60,9 +60,9 @@
 			</div>
 			
 			<h1 class="titleandbody">What are fractals?</h1>
-			<p class="titleandbody">A fractal is never-ending pattern that displays at every scale.</p>
+			<p class="titleandbody">A fractal is an object that exhibits self-similar and repeating patterns that display at every scale.</p>
 			<h1 class="titleandbody">Why do we study fractals?</h1>
-			<p class="titleandbody">We are interested in studying properties of fractals, such as perimeter and area.</p>
+			<p class="titleandbody">We are interested in studying properties of fractals, such as perimeter and area.  Fractals also provide a visualization for recursions, often studied in mathematics and computer science.  A recursion is simple a repeated application of some definition or procedure.</p>
 			
 		</div>
 		
@@ -161,9 +161,9 @@
 				</script>
 					
 				</div>
-				<div id="stintro" class="col-md-6" style="padding-top: 10%">
-					<p>The Sierpinski Triangle fractal is constructed in the following manner:
-						<ol>
+				<div id="stintro" class="col-md-6" style="padding-top: 5%">
+					<p style="font-size: 25px;"><b>The Sierpinski Triangle fractal is constructed in the following manner:</b>
+						<ol style="font-size: 25px;">
 							<li>Begin with an equilateral triangle.</li>
 							<li>Divide this triangle into four congruent equilateral triangles.</li>
 							<li>Remove the central triangle.</li>
@@ -174,7 +174,7 @@
 			</div>
 			<div class="row">
 				
-				<div class="col-md-6">
+				<div class="col-md-6"> 
 					
 					<h2 class="titleandbody">Perimeter</h2>
 					<p class="titleandbody">Let's assume that the side lengths of a given equilateral triangle are 1 unit.<br>
@@ -199,7 +199,7 @@
 					<p class="titleandbody">
 						Since fractals are infinite, we can find the true perimeter of the Sierpinski triangle by finding the limit as it approaches infinity.
 						
-						\[ \lim_{n \to \infty} \frac{3^{n+1}}{2^{n}} = \frac{3^{\infty+1}}{2^{\infty}} = \frac{3^{\infty}}{2^{\infty}} = \frac{\infty}{\infty} = \infty\] 
+						\[ \lim_{n \to \infty} \frac{3^{n+1}}{2^{n}} =  \infty\] 
 					</p>
 					
 					
@@ -227,7 +227,7 @@
 						Which we can see gives us a geometric series with the following common ratio:
 						\[ \frac{3^{n}}{4^{n}} \]<br>
 						As with the perimeter, in order to find the true area of a fractal, we must find the limit of the ratio as it approaches inifity.<br>
-						\[ \lim_{n \to \infty} \frac{3^{n}}{4^{n}} =  \frac{3^{\infty}}{4^{\infty}} = \left(\frac{3}{4}\right)^{\infty} = 0\]
+						\[ \lim_{n \to \infty} \frac{3^{n}}{4^{n}} = 0\]
 					</p>
 				</div>
 				
@@ -418,9 +418,9 @@
 					
 				</div>
 				<div id="ptintro" class="col-md-6">
-					<p>
-						The Pythagoras Tree fractal is constructed in the following manner:
-						<ol>
+					<p style="font-size: 25px;">
+						<b>The Pythagoras Tree fractal is constructed in the following manner:</b>
+						<ol style="font-size: 25px;">
 							<li>Begin with a square.</li>
 							<li>Construct two squares on top of the original square such that, when the edges of all three squares meet, a 45-45-90 triangle is formed.</li>
 							<li>Repeat Step 2 recursively for each square formed.</li>
@@ -443,7 +443,7 @@
 					Thus, a generalized formula: \[ A_n = 2(n+1) \]<br>
 					Even more general for side length s: \[ A_n = s^{2}(n+1) \]<br>
 					In order to find the true area of the fractal in our example, we need to find the limit of this formula as it approaches infinity.<br>
-					\[ \lim_{n \to \infty} 2(n+1) = 2(\infty+1)\\= 2(\infty)\\= \infty \]<br>
+					\[ \lim_{n \to \infty} 2(n+1) =  \infty \]<br>
 					<b>HOWEVER</b>, we have not shown that the area of the fractal diverges.  We have shown that the <b>sum of the areas of each square diverges.</b>  What we have failed to consider is the overlap that occurs beginning in the fifth iteration.  Consider the eleventh iteration shown below.
 				</p>
 				
@@ -539,10 +539,10 @@
 					</script>
 					
 				</div>
-				<div id="ptintro" class="col-md-6">
-					<p>
-						The Koch Snowflake fractal is constructed in the following manner:
-						<ol>
+				<div id="ptintro" class="col-md-6" style="padding-top: 1%;">
+					<p style="font-size: 25px;">
+						<b>The Koch Snowflake fractal is constructed in the following manner:</b>
+						<ol style="font-size: 25px;">
 							<li>Begin with an equilateral triangle. Consider each side as a line segment.</li>
 							<li>Divide each segment into three equal segments.</li>
 							<li>Draw an equilateral triangle outward with the middle segment from Step 2 as its base.  Afterwards, remove the base. </li>
@@ -564,7 +564,7 @@
 						Hence we can generalize the perimeter for any iteration by the following.
 						\[P_{n} = N_{n} \cdot S_{n} = 3 \cdot 4^{n} \cdot \frac{s}{3^{n}} = 3 \cdot s \cdot \left( \frac{4}{3}\right) ^{n}\] <br>
 						Of course, to truly find the perimeter of the Koch snowflake we must take its limit as it approaches inifity.
-						\[ \lim_{n \to \infty} 3 \cdot s \cdot \left( \frac{4}{3}\right) ^{n} = 3 \cdot s \cdot \left( \frac{4}{3}\right) ^{\infty} = \infty \]
+						\[ \lim_{n \to \infty} 3 \cdot s \cdot \left( \frac{4}{3}\right) ^{n} = \infty \]
 					</p>
 				</div>
 				
@@ -572,7 +572,25 @@
 					
 					<h2 class="titleandbody">Area</h2>
 					<p class="titleandbody">
-						When calculating the area of the Koch snowflake, consider an equilateral triangle is added to <b>each</b> side of the iteration.
+						When calculating the area of the Koch snowflake, consider an equilateral triangle is added to <b>each</b> side of the iteration.  We can represent this addition to find the total number of triangles below.
+						\[ T_{n} = 3 \cdot 4^{n - 1} = \frac{3}{4} \cdot 4^{n} \] <br>
+						Consider a<sub>n</sub> as the area of each added triangle in the n<sup>th</sup> iteration.  By this logic notice a<sub>0</sub> is the area of the original triangle.
+						\[ a_{n} = \frac{a_{n-1}}{9} = \frac{a_{0}}{9^{n}} \] <br>
+						Let b<sub>n</sub> represent the total area of the iteration.
+						\[b_{n} = T_{n} \cdot a_{n} = \frac{3}{4} \cdot \left( \frac{4}{9} \right) ^{n} \cdot a_{0} \] <br>
+						Now we want to see the total area of the snowflake after n iterations.  This is modelled below.
+						\[ A_{n} = a_{0} + \sum^{n}_{k =1} b_{k} \\
+						= a_{0} \left( 1 + \frac{3}{4} \sum^{n}_{k=1} \left(\frac{4}{9} \right) ^{k} \right) \\
+						= a_{0} \left( 1 + \frac{1}{3} \sum^{n-1}_{k=0} \left( \frac{4}{9} \right) ^{k} \right) \\
+						= a_{0} \left( 1 + \frac{3}{5} \left( 1 - \left( \frac{4}{9} \right) ^{n} \right) \right) \\
+						= \frac{a_{0}}{5} \left( 8 - 3 \left( \frac{4}{9} \right) ^{n} \right) \] <br>
+						
+						By taking the limit of the area, we get the following:
+						\[ \lim_{n \to \infty} A_{n} = \lim_{n \to \infty} \frac{a_{0}}{5} \left( 8 - 3 \left( \frac{4}{9} \right) ^{n} \right) \\
+						= \frac{8}{5} \cdot a_{0}\] <br>
+						
+						Hence the area of the Koch snowflake is <sup>8</sup>&frasl;<sub>5</sub> of the area of the given triangle.
+						
 					</p>
 					
 					
